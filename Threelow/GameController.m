@@ -55,16 +55,18 @@
 
 - (void)PrintDiceValues {
     
+    for (Dice *dice in self.diceArray) {
+        if (dice.isHeld) {
+            self.currentScore += dice.currentValue;
+        }
+    }
+    NSLog(@"Your current score is: %lu.",self.currentScore);
+    
     for (Dice* dice in self.diceArray){
         if (dice.isHeld) {
             NSLog(@"%lu: [%lu]",(unsigned long)[self.diceArray indexOfObject:dice], dice.currentValue);
         } else {
             NSLog(@"%lu: %lu",(unsigned long)[self.diceArray indexOfObject:dice], dice.currentValue);
-        }
-    }
-    for (Dice *dice in self.diceArray) {
-        if (dice.isHeld) {
-            self.currentScore += dice.currentValue;
         }
     }
 
