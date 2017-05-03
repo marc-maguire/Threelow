@@ -18,11 +18,61 @@
 // ⚀ ⚁ ⚂ ⚃ ⚄ ⚅
 
 #import <Foundation/Foundation.h>
+#import "Dice.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
+      
+        Dice *dice1 = [[Dice alloc]init];
+        Dice *dice2 = [[Dice alloc]init];
+        Dice *dice3 = [[Dice alloc]init];
+        Dice *dice4 = [[Dice alloc]init];
+        Dice *dice5 = [[Dice alloc]init];
+        
+        [dice1 randomizeValue];
+        [dice2 randomizeValue];
+        [dice3 randomizeValue];
+        [dice4 randomizeValue];
+        [dice5 randomizeValue];
+        
+        NSArray *diceArray = @[dice1, dice2, dice3,dice4,dice5];
+        
+//        NSLog(@"\nDice 1: %ld\nDice 2: %ld\nDice 3: %ld\nDice 4: %ld\nDice 5: %ld",(long)dice1.currentValue,(long)dice2.currentValue,(long)dice3.currentValue,(long)dice4.currentValue,(long)dice5.currentValue);
+        
+        
+//        char inputChars[255];
+//        printf("Type roll to roll the dice: ");
+//        fgets(inputChars, 255, stdin);
+//        NSString *result = [NSString stringWithCString:inputChars encoding:NSUTF8StringEncoding];
+//        NSCharacterSet *charSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+//        NSString *parsedString = [result stringByTrimmingCharactersInSet:charSet];
+
+        BOOL gameOn = YES;
+        
+        while (gameOn) {
+            
+            char inputChars[255];
+            printf("Type roll to roll the dice: ");
+            fgets(inputChars, 255, stdin);
+            NSString *result = [NSString stringWithCString:inputChars encoding:NSUTF8StringEncoding];
+            NSCharacterSet *charSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+            NSString *parsedString = [result stringByTrimmingCharactersInSet:charSet];
+
+            if([parsedString containsString:@"roll"]) {
+                NSInteger integer = 1;
+                for (Dice *dice in diceArray) {
+                    
+                    [dice randomizeValue];
+                    NSLog(@"Dice %li: %lu",(long)integer, dice.currentValue);
+                    integer ++;
+                    
+                }
+            }
+            
+            
+            
+        }
+        
     }
     return 0;
 }
