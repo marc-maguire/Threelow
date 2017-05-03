@@ -16,10 +16,13 @@
 
 @interface GameController : NSObject
 
-@property (nonatomic, copy) NSArray *diceArray;
+@property (nonatomic, copy) NSMutableArray *diceArray;
+@property (nonatomic) NSInteger currentScore;
 
 - (void)holdDie:(NSInteger)index;
 //- (void)printDiceValue;
 - (void)rollDiceandPrintValues;
+- (void)resetHeldDice;
+
 
 @end

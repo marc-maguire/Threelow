@@ -11,7 +11,45 @@
 
 @implementation GameController
 
+//track amount of dice rolls to account for
+
+-(instancetype)init {
+    if (self = [super init]) {
+        
+        Dice *dice1 = [[Dice alloc]init];
+        [dice1 randomizeValue];
+        Dice *dice2 = [[Dice alloc]init];
+        [dice2 randomizeValue];
+        Dice *dice3 = [[Dice alloc]init];
+        [dice3 randomizeValue];
+        Dice *dice4 = [[Dice alloc]init];
+        [dice4 randomizeValue];
+        Dice *dice5 = [[Dice alloc]init];
+        [dice5 randomizeValue];
+        _diceArray = [[NSMutableArray alloc]init];
+        [_diceArray addObject:dice1];
+        [_diceArray addObject:dice2];
+        [_diceArray addObject:dice3];
+        [_diceArray addObject:dice4];
+        [_diceArray addObject:dice5];
+        _currentScore = 0;
+    }
+    return self;
+}
+
 -(void)holdDie:(NSInteger)index {
+    
+    NSInteger internalIndex = index -1;
+    
+    for (Dice *dice in self.diceArray) {
+        if (dice == [self.diceArray objectAtIndex:internalIndex]) {
+            if (dice.isHeld == YES) {
+                [dice setIsHeld:NO];
+            } else {
+                [dice setIsHeld:YES];
+            }
+        }
+    }
     
 }
 
@@ -26,6 +64,12 @@
     }
 }
 
-
+- (void)resetHeldDice {
+    
+    for (Dice *dice in self.diceArray) {
+        [dice setIsHeld:NO];
+    }
+    
+}
 
 @end
