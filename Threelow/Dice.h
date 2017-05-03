@@ -14,6 +14,6 @@
 @property (nonatomic) BOOL isHeld;
 
 - (void)randomizeValue;
-- (void)printCurrentValue;
+
 
 @end

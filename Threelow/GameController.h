@@ -20,9 +20,12 @@
 @property (nonatomic) NSInteger currentScore;
 
 - (void)holdDie:(NSInteger)index;
-//- (void)printDiceValue;
-- (void)rollDiceandPrintValues;
+
+- (void)PrintDiceValues;
 - (void)resetHeldDice;
+
+
+
 
 
 @end
