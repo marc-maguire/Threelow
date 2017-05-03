@@ -35,7 +35,7 @@ int main(int argc, const char * argv[]) {
         [dice4 randomizeValue];
         [dice5 randomizeValue];
         
-        NSArray *diceArray = @[dice1, dice2, dice3,dice4,dice5];
+        
         
 //        NSLog(@"\nDice 1: %ld\nDice 2: %ld\nDice 3: %ld\nDice 4: %ld\nDice 5: %ld",(long)dice1.currentValue,(long)dice2.currentValue,(long)dice3.currentValue,(long)dice4.currentValue,(long)dice5.currentValue);
         
@@ -46,13 +46,16 @@ int main(int argc, const char * argv[]) {
 //        NSString *result = [NSString stringWithCString:inputChars encoding:NSUTF8StringEncoding];
 //        NSCharacterSet *charSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
 //        NSString *parsedString = [result stringByTrimmingCharactersInSet:charSet];
-
+        NSArray *diceArray = @[dice1, dice2, dice3,dice4,dice5];
+        NSMutableArray *heldDice = [[NSMutableArray alloc]init];
+        NSMutableArray *unheldDice = [[NSMutableArray alloc]init];
+       
         BOOL gameOn = YES;
         
         while (gameOn) {
             
             char inputChars[255];
-            printf("Type roll to roll the dice: ");
+            printf("Welcome to Threelow!\nPlease choose from the following options:\nType 'hold <number from 1-5>' to choose how many dice to hold.\nType 'roll' to roll the dice that you are holding.");
             fgets(inputChars, 255, stdin);
             NSString *result = [NSString stringWithCString:inputChars encoding:NSUTF8StringEncoding];
             NSCharacterSet *charSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
@@ -60,19 +63,28 @@ int main(int argc, const char * argv[]) {
 
             if([parsedString containsString:@"roll"]) {
                 NSInteger integer = 1;
-                for (Dice *dice in diceArray) {
+                for (Dice *dice in heldDice) {
                     
                     [dice randomizeValue];
                     NSLog(@"Dice %li: %lu",(long)integer, dice.currentValue);
                     integer ++;
                     
                 }
+            } else if ([parsedString containsString:@"hold"]){
+                NSArray *components = [parsedString componentsSeparatedByString:@" "];
+                NSString *holdNumber = components[1];
+                NSInteger intHoldNumber = [holdNumber integerValue];
+                
+            
+               // NSInteger test = [components[1] integerValue]; <- can do it in one line
+            }
+                
             }
             
             
             
         }
         
-    }
+    
     return 0;
 }

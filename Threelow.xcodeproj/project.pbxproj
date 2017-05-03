@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		92358AFF1EBA6B3800E0EE6D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92358AFE1EBA6B3800E0EE6D /* main.m */; };
 		92358B071EBA6DF700E0EE6D /* Dice.m in Sources */ = {isa = PBXBuildFile; fileRef = 92358B061EBA6DF700E0EE6D /* Dice.m */; };
+		92358B0A1EBA7D3400E0EE6D /* GameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92358B091EBA7D3400E0EE6D /* GameController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		92358AFE1EBA6B3800E0EE6D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		92358B051EBA6DF700E0EE6D /* Dice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dice.h; sourceTree = "<group>"; };
 		92358B061EBA6DF700E0EE6D /* Dice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dice.m; sourceTree = "<group>"; };
+		92358B081EBA7D3400E0EE6D /* GameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameController.h; sourceTree = "<group>"; };
+		92358B091EBA7D3400E0EE6D /* GameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +66,8 @@
 				92358AFE1EBA6B3800E0EE6D /* main.m */,
 				92358B051EBA6DF700E0EE6D /* Dice.h */,
 				92358B061EBA6DF700E0EE6D /* Dice.m */,
+				92358B081EBA7D3400E0EE6D /* GameController.h */,
+				92358B091EBA7D3400E0EE6D /* GameController.m */,
 			);
 			path = Threelow;
 			sourceTree = "<group>";
@@ -124,6 +129,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92358B0A1EBA7D3400E0EE6D /* GameController.m in Sources */,
 				92358B071EBA6DF700E0EE6D /* Dice.m in Sources */,
 				92358AFF1EBA6B3800E0EE6D /* main.m in Sources */,
 			);
@@ -254,6 +260,7 @@
 				92358B041EBA6B3800E0EE6D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
