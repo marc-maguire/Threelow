@@ -17,6 +17,7 @@
 @interface GameController : NSObject
 
 @property (nonatomic, copy) NSMutableArray *diceArray;
+//can i update diceArray to be a regular Array since we are not pulling objects out of it?
 @property (nonatomic) NSInteger currentScore;
 
 - (void)holdDie:(NSInteger)index;

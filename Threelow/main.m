@@ -32,10 +32,14 @@ int main(int argc, const char * argv[]) {
         GameController *gameController = [[GameController alloc]init];
         BOOL gameOn = YES;
         
+        
+        NSLog(@"Welcome to Threelow!\nThis is how the game works! To start the game, 5 dice will be rolled.\nYou will then have the option of picking up / holding 1 to 5 of the dice.\nThe object of the game is to have the lowest score possible and you lock in your score by picking up a die./nEvery turn, you must hold at least 1 dice.\nPicking up a 3, counts as a zero for your score (best case scenario!), all other die represent their face value.\nYou must hold 1 incremental die each turn.\nWhen you roll, all held dice will be held for the rest of the game. If you accidentally hold a dice, you can unhold it by resending the hold <number> command.\n\n");
+        
         while (gameOn) {
             
             
-            printf("Welcome to Threelow!\nThis is how the game works! To start the game, 5 dice will be rolled.\nYou will then have the option of picking up / holding 1 to 5 of the dice.\nThe object of the game is to have the lowest score possible and you lock in your score by picking up a die./nEvery turn, you must hold at least 1 dice.\nPicking up a 3, counts as a zero for your score (best case scenario!), all other die represent their face value.\nYou must hold 1 incremental die each turn.\nWhen you roll, all held dice will be held for the rest of the game. If you accidentally hold a dice, you can unhold it by resending the hold <number> command.\n\nPlease choose from the following options:\nType 'hold <number from 1-5>' to choose how many dice to hold. You can re-enter this command if you would like to pick up 2 die in the same turn.\nType 'roll' to roll the dice that you are holding.\nType 'reset dice' to unhold all dice that you are able to unhold (ones that were held in this turn)\nType 'reset game' to reset your score and unhold all dice");
+            NSLog(@"\n\nPlease choose from the following options:\nType 'hold <number from 1-5>' to choose how many dice to hold. You can re-enter this command if you would like to pick up 2 die in the same turn.\nType 'roll' to roll the dice that you are holding.\nType 'reset dice' to unhold all dice that you are able to unhold (ones that were held in this turn)\nType 'reset game' to reset your score and unhold all dice");
+            
             char inputChars[255];
             fgets(inputChars, 255, stdin);
             NSString *result = [NSString stringWithCString:inputChars encoding:NSUTF8StringEncoding];
@@ -56,7 +60,21 @@ int main(int argc, const char * argv[]) {
             } else if ([parsedString containsString:@"reset dice"]) {
                 
             }
+            
+            
+            NSInteger heldDiceCount = 0;
+            for (Dice *dice in gameController.diceArray) {
+                if (dice.isHeld) {
+                    heldDiceCount ++;
+                }
+            }
+            if (heldDiceCount == 5) {
+                //dice values are not updated at this point so score is 0 (it doesn't account for what happened in the last turn)
+                [gameController printDiceValues];
                 
+                [gameController resetGame];
+            }
+            
             }
 
 

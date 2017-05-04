@@ -13,6 +13,8 @@
 
 //track amount of dice rolls to account for
 
+
+
 -(instancetype)init {
     if (self = [super init]) {
         
@@ -41,17 +43,21 @@
     
     NSInteger internalIndex = index -1;
     
-    for (Dice *dice in self.diceArray) {
-        if (dice == [self.diceArray objectAtIndex:internalIndex]) {
-            if (dice.isHeld == YES) {
-                if (dice.isLockedIn) {
-                    NSLog(@"Cannot unhold a die that was picked up in a previous turn");
-                } else if (dice.isLockedIn == NO){
-                    [dice setIsHeld:NO];
-                }
-            }
+    //if (self.diceArray[internalIndex].isHeld)
+    
+    
+    Dice *dice = [self.diceArray objectAtIndex:internalIndex];
+    if (dice.isHeld) {
+        if (dice.isLockedIn) {
+            NSLog(@"Cannot unhold a die that was picked up in a previous turn");
+        } else {
+            [dice setIsHeld:NO];
         }
+    } else {
+        [dice setIsHeld:YES];
     }
+    
+    
     [self printDiceValues];
     
 }
@@ -62,26 +68,36 @@
     
     for (Dice* dice in self.diceArray){
         if (dice.isHeld) {
-            NSLog(@"%lu: [%lu]",(unsigned long)[self.diceArray indexOfObject:dice], dice.currentValue);
+            NSLog(@"%lu: [%lu]",(unsigned long)[self.diceArray indexOfObject:dice]+1, dice.currentValue);
         } else {
-            NSLog(@"%lu: %lu",(unsigned long)[self.diceArray indexOfObject:dice], dice.currentValue);
+            NSLog(@"%lu: %lu",(unsigned long)[self.diceArray indexOfObject:dice]+1, dice.currentValue);
         }
     }
-
+    
 }
 
 - (void)resetHeldDice {
     
     for (Dice *dice in self.diceArray) {
         if (dice.isLockedIn == NO) {
-        [dice setIsHeld:NO];
+            [dice setIsHeld:NO];
+        }
+        
     }
-    
-}
     [self printDiceValues];
 }
 
 -(void)rollDice {
+    for (Dice *dice in self.diceArray) {
+        if ((dice.isHeld) && (!dice.isLockedIn)){
+            //need to account for 3 = 0 points
+            if (dice.currentValue == 3){
+                self.currentScore += 0;
+            } else {
+                self.currentScore += dice.currentValue;
+            }
+    }
+    }
     for (Dice *dice in self.diceArray) {
         if (dice.isHeld) {
             dice.isLockedIn = YES;
@@ -89,11 +105,7 @@
             [dice randomizeValue];
         }
     }
-    for (Dice *dice in self.diceArray) {
-        if (dice.isHeld) {
-            self.currentScore += dice.currentValue;
-        }
-    }
+
     [self printDiceValues];
 }
 
@@ -103,8 +115,6 @@
         dice.isHeld = NO;
         dice.isLockedIn = NO;
     }
-    
-    [self rollDice];
     
 }
 
