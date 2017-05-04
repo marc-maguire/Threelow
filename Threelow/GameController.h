@@ -21,8 +21,10 @@
 
 - (void)holdDie:(NSInteger)index;
 
-- (void)PrintDiceValues;
+- (void)printDiceValues;
 - (void)resetHeldDice;
+- (void)rollDice;
+- (void)resetGame;
 
 
 

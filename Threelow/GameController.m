@@ -44,22 +44,20 @@
     for (Dice *dice in self.diceArray) {
         if (dice == [self.diceArray objectAtIndex:internalIndex]) {
             if (dice.isHeld == YES) {
-                [dice setIsHeld:NO];
-            } else {
-                [dice setIsHeld:YES];
+                if (dice.isLockedIn) {
+                    NSLog(@"Cannot unhold a die that was picked up in a previous turn");
+                } else if (dice.isLockedIn == NO){
+                    [dice setIsHeld:NO];
+                }
             }
         }
     }
+    [self printDiceValues];
     
 }
 
-- (void)PrintDiceValues {
+- (void)printDiceValues {
     
-    for (Dice *dice in self.diceArray) {
-        if (dice.isHeld) {
-            self.currentScore += dice.currentValue;
-        }
-    }
     NSLog(@"Your current score is: %lu.",self.currentScore);
     
     for (Dice* dice in self.diceArray){
@@ -75,8 +73,38 @@
 - (void)resetHeldDice {
     
     for (Dice *dice in self.diceArray) {
+        if (dice.isLockedIn == NO) {
         [dice setIsHeld:NO];
     }
+    
+}
+    [self printDiceValues];
+}
+
+-(void)rollDice {
+    for (Dice *dice in self.diceArray) {
+        if (dice.isHeld) {
+            dice.isLockedIn = YES;
+        } else if (dice.isHeld == NO) {
+            [dice randomizeValue];
+        }
+    }
+    for (Dice *dice in self.diceArray) {
+        if (dice.isHeld) {
+            self.currentScore += dice.currentValue;
+        }
+    }
+    [self printDiceValues];
+}
+
+- (void)resetGame {
+    
+    for (Dice *dice in self.diceArray) {
+        dice.isHeld = NO;
+        dice.isLockedIn = NO;
+    }
+    
+    [self rollDice];
     
 }
 

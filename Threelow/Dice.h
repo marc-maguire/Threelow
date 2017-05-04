@@ -12,6 +12,7 @@
 
 @property (nonatomic) NSInteger currentValue;
 @property (nonatomic) BOOL isHeld;
+@property (nonatomic) BOOL isLockedIn;
 
 - (void)randomizeValue;
 
